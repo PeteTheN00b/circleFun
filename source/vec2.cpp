@@ -45,3 +45,44 @@ Vec2& Vec2::operator/=(float s)
 
 	return *this;
 }
+
+
+Vec2 operator+(Vec2 const& u, Vec2 const& v)
+{
+	Vec2 temp;
+	temp += u;
+	temp += v;
+	return temp;
+}
+
+Vec2 operator-(Vec2 const& u, Vec2 const& v)
+{
+	Vec2 temp;
+	temp += u;
+	temp -= v;
+	return temp;
+}
+
+Vec2 operator*(Vec2 const& v, float s)
+{
+	Vec2 temp;
+	temp += v;
+	temp *= s;
+	return temp;
+}
+
+Vec2 operator/(Vec2 const& v, float s)
+{
+	Vec2 temp;
+	temp += v;
+	temp /= s;
+	return temp;
+}
+
+Vec2 operator*(float s, Vec2 const& v)
+{
+	Vec2 temp;
+	temp += v;
+	temp *= s;
+	return temp;
+}
