@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 #include "vec2.hpp"
+#include "mat2.hpp"
 
 TEST_CASE("Vec2Tests")
 {
@@ -53,6 +54,21 @@ TEST_CASE("Vec2Tests")
 
 	REQUIRE(c.x == 3);
 	REQUIRE(c.y == 7);
+}
+
+TEST_CASE("Mat2Tests")
+{
+	Mat2 m1;
+	Mat2 m2{ 1, 3, 3, 1 };
+
+	m1 *= m2; //m1 should become:
+	//1, 3
+	//3, 1, like m2 because its an identity matrix
+
+	REQUIRE(m1.e_00 == 1);
+	REQUIRE(m1.e_10 == 3);
+	REQUIRE(m1.e_01 == 3);
+	REQUIRE(m1.e_11 == 1);
 }
 
 int main(int argc, char *argv[])
