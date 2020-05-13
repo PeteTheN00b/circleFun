@@ -13,3 +13,35 @@ TEST_CASE("Vec2Test", "{Vec2Tests}")
 	REQUIRE(b.x == Approx(5.1f));
 	REQUIRE(b.y == Approx(-9.3f));
 }
+
+Vec2& Vec2::operator+=(Vec2 const& v)
+{
+	x += v.x;
+	y += v.y;
+
+	return *this;
+}
+
+Vec2& Vec2::operator-=(Vec2 const& v)
+{
+	x -= v.x;
+	y -= v.y;
+
+	return *this;
+}
+
+Vec2& Vec2::operator*=(float s)
+{
+	x *= s;
+	y *= s;
+
+	return *this;
+}
+
+Vec2& Vec2::operator/=(float s)
+{
+	x /= s;
+	y /= s;
+
+	return *this;
+}
