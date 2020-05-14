@@ -12,6 +12,11 @@ Mat2& Mat2::operator*=(Mat2 const& m)
 	return temp;
 }
 
+float Mat2::det() const
+{
+	return e_00 * e_11 - e_01 * e_10;
+}
+
 Mat2 operator*(Mat2 const& m1, Mat2 const& m2)
 {
 	Mat2 temp;
