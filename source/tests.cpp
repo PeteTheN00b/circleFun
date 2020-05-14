@@ -69,6 +69,13 @@ TEST_CASE("Mat2Tests")
 	REQUIRE(m1.e_10 == 3);
 	REQUIRE(m1.e_01 == 3);
 	REQUIRE(m1.e_11 == 1);
+
+	REQUIRE(m1 == m2); //same check as above, just want to make sure both work
+
+
+	Mat2 m3{ 10, 6, 6, 10 }; //product of m1 and m2
+
+	REQUIRE((m1 * m2) == m3); //catch2 doesn't run without the internal bracket
 }
 
 int main(int argc, char *argv[])
