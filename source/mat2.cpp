@@ -22,3 +22,8 @@ Mat2 operator*(Mat2 const& m1, Mat2 const& m2)
 
 	return temp;
 }
+
+bool operator==(Mat2 const& m1, Mat2 const& m2)
+{
+	return m1.e_00 == m2.e_00 && m1.e_01 == m2.e_01 && m1.e_10 == m2.e_10 && m1.e_11 == m2.e_11;
+}
