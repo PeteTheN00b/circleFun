@@ -81,8 +81,5 @@ Vec2 operator/(Vec2 const& v, float s)
 
 Vec2 operator*(float s, Vec2 const& v)
 {
-	Vec2 temp;
-	temp += v;
-	temp *= s;
-	return temp;
+	return v * s;
 }

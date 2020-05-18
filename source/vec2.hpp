@@ -4,8 +4,8 @@
 
 struct Vec2 {
 	//Order is important for aggregate init
-	float x = 0;
-	float y = 0;
+	float x = 0.0f;
+	float y = 0.0f;
 
 	Vec2& operator+=(Vec2 const& v);
 	Vec2& operator-=(Vec2 const& v);
