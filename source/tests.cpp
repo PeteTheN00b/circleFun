@@ -2,6 +2,7 @@
 #include <catch.hpp>
 #include "vec2.hpp"
 #include "mat2.hpp"
+#include "color.hpp"
 
 TEST_CASE("Vec2Tests")
 {
@@ -111,6 +112,14 @@ TEST_CASE("Rotation Matrix")
 
 	REQUIRE((v * make_rotation_mat2(90)).x == Approx(r90_v.x));
 	REQUIRE((v * make_rotation_mat2(90)).y == Approx(r90_v.y));
+}
+
+TEST_CASE("Color Storage")
+{
+	Color c{ 200, 50, 0 };
+	REQUIRE(c.r == 200);
+	REQUIRE(c.g == 50);
+	REQUIRE(c.b == 0);
 }
 
 int main(int argc, char *argv[])
