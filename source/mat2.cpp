@@ -4,8 +4,6 @@
 #define _USE_MATH_DEFINES //have to do this to get access to pi constant
 #include <math.h>
 
-#include <iostream>
-
 Mat2& Mat2::operator*=(Mat2 const& m)
 {
 	Mat2 temp = *this;
