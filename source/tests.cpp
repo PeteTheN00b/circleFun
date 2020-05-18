@@ -76,6 +76,41 @@ TEST_CASE("Mat2Tests")
 	Mat2 m3{ 10, 6, 6, 10 }; //product of m1 and m2
 
 	REQUIRE((m1 * m2) == m3); //catch2 doesn't run without the internal bracket
+
+
+	Mat2 m4{ 3, 4, 2, 1 };
+	Mat2 m5{ 1, 5, 3, 7 };
+	Mat2 m6{ 15, 43, 5, 17 };
+
+	REQUIRE((m4 * m5) == m6);
+}
+
+TEST_CASE("Mat2FurtherTests2.6")
+{
+	Mat2 i; //Identity matrix
+	Mat2 m1{ 2, 5, 7, 3 };
+	Vec2 v{ 1, 2 };
+
+	Vec2 m1v{ 12, 13 };
+
+	REQUIRE((m1 * v).x == m1v.x);
+	REQUIRE((m1 * v).y == m1v.y);
+
+	REQUIRE(m1.det() == Approx(-29.f));
+
+	REQUIRE((m1 * inverse(m1)) == i); //any matrix, multiplied by its inverse, should return the identity matrix
+
+	Mat2 t_m1{ 2, 7, 5, 3 };
+	REQUIRE(transpose(m1) == t_m1);
+}
+
+TEST_CASE("Rotation Matrix")
+{
+	Vec2 v{ -3, 1 };
+	Vec2 r90_v{1 , 3}; //should be the result of rotating the vector by 90 degrees
+
+	REQUIRE((v * make_rotation_mat2(90)).x == Approx(r90_v.x));
+	REQUIRE((v * make_rotation_mat2(90)).y == Approx(r90_v.y));
 }
 
 int main(int argc, char *argv[])
