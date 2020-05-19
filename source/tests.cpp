@@ -4,6 +4,12 @@
 #include "mat2.hpp"
 #include "color.hpp"
 
+#include "classes/circle.hpp"
+#include "classes/rectangle.hpp"
+
+#define _USE_MATH_DEFINES //have to do this to get access to pi constant
+#include <math.h>
+
 TEST_CASE("Vec2Tests")
 {
 	Vec2 a{ 1, 3 };
@@ -120,6 +126,20 @@ TEST_CASE("Color Storage")
 	REQUIRE(c.r == 200);
 	REQUIRE(c.g == 50);
 	REQUIRE(c.b == 0);
+}
+
+TEST_CASE("Circle Circumference")
+{
+	myShapes::Circle c{ {1,2}, 5 };
+
+	REQUIRE(c.circumference() == Approx(10 * M_PI));
+}
+
+TEST_CASE("Rectangle Perimeter")
+{
+	myShapes::Rectangle r{ {1,4}, {3, 7} };
+
+	REQUIRE(r.perimeter() == Approx(10.0f));
 }
 
 int main(int argc, char *argv[])
