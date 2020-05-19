@@ -4,6 +4,8 @@
 #include "..\vec2.hpp"
 #include "../color.hpp" //is there any difference between using / and \ ?
 
+#include "../window.hpp"
+
 namespace myShapes{ //prevents naming conflict with stdcall library in tests.cpp
 	class Rectangle //parallel to axis, no rotation
 	{
@@ -17,6 +19,7 @@ namespace myShapes{ //prevents naming conflict with stdcall library in tests.cpp
 		Rectangle(Vec2 const& min, Vec2 const& max, Color const& color);
 
 		float perimeter() const;
+		void draw(Window* win);
 	};
 }
 

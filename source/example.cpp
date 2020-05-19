@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "classes/circle.hpp"
+#include "classes/rectangle.hpp"
 
 
 int main(int argc, char* argv[])
@@ -14,6 +15,9 @@ int main(int argc, char* argv[])
   myShapes::Circle c2{ {500, 350}, {200}, {50, 150, 0} };
   myShapes::Circle c3{ {350, 600}, {75}, {80, 0, 255} };
 
+  myShapes::Rectangle r1{ {150, 650}, {300, 750}, {122, 0, 0} };
+  myShapes::Rectangle r2{ {400, 300}, {500, 600}, {255, 255, 255} };
+
   while (!win.should_close()) {
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       win.close();
@@ -22,6 +26,9 @@ int main(int argc, char* argv[])
     c1.draw(&win);
     c2.draw(&win);
     c3.draw(&win, 50);
+
+    r1.draw(&win);
+    r2.draw(&win);
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
