@@ -10,6 +10,18 @@
 #define _USE_MATH_DEFINES //have to do this to get access to pi constant
 #include <math.h>
 
+TEST_CASE("Vec2ConstructorTests")
+{
+	Vec2 a;
+	Vec2 b{ 5.1f, -9.3f };
+
+	REQUIRE(a.x == 0);
+	REQUIRE(a.y == 0);
+
+	REQUIRE(b.x == Approx(5.1f));
+	REQUIRE(b.y == Approx(-9.3f));
+}
+
 TEST_CASE("Vec2Tests")
 {
 	Vec2 a{ 1, 3 };
@@ -130,14 +142,14 @@ TEST_CASE("Color Storage")
 
 TEST_CASE("Circle Circumference")
 {
-	myShapes::Circle c{ {1,2}, 5 };
+	myShapes::Circle c{ {1,2}, 5 , {1, 0, 0} };
 
 	REQUIRE(c.circumference() == Approx(10 * M_PI));
 }
 
 TEST_CASE("Rectangle Perimeter")
 {
-	myShapes::Rectangle r{ {1,4}, {3, 7} };
+	myShapes::Rectangle r{ {1,4}, {3, 7}, {1, 1, 1} };
 
 	REQUIRE(r.perimeter() == Approx(10.0f));
 }
