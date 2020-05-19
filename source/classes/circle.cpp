@@ -7,9 +7,10 @@ myShapes::Circle::Circle() :
 	centre_{ 0, 0 },
 	radius_{ 1.0f } {}
 
-myShapes::Circle::Circle(Vec2 const& centre, float radius) :
+myShapes::Circle::Circle(Vec2 const& centre, float radius, Color const& color) :
 	centre_{centre},
-	radius_{radius} {}
+	radius_{radius},
+	color_{ color } {}
 
 float myShapes::Circle::circumference() const
 {
