@@ -27,7 +27,7 @@ namespace myShapes { //only necessary to prevent naming conflicts for the rectan
 
 		bool is_inside(Vec2 const& point) const;
 
-		void drawAngle(Window* win, float theta, float thickness) const;
+		void draw_angle(Window* win, float theta, float thickness) const;
 	};
 }
 
