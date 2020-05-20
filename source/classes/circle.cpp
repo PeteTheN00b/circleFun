@@ -52,3 +52,12 @@ bool myShapes::Circle::is_inside(Vec2 const& point) const
 	return sqrt(dist.x * dist.x + dist.y * dist.y) <= radius_;
 	//If the magnitude of the distance between the point and the circle's centre is smaller than the circle's radius, then this point must be in the circle
 }
+
+void myShapes::Circle::drawAngle(Window* win, float theta, float thickness) const
+{
+	win->draw_line(
+		centre_.x, centre_.y,
+		centre_.x + radius_ * sin(M_PI * theta / 180.f), centre_.y - radius_ * cos(M_PI * theta / 180.f),
+		color_.r / 255.f, color_.g / 255.f, color_.b / 255.f,
+		thickness);
+}
