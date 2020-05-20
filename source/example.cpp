@@ -11,24 +11,21 @@ int main(int argc, char* argv[])
 {
   Window win{std::make_pair(800,800)};
 
+  //My inits
   myShapes::Circle c1{ {300, 300}, {100}, {255, 128, 0} };
   myShapes::Circle c2{ {500, 350}, {200}, {50, 150, 0} };
   myShapes::Circle c3{ {350, 600}, {75}, {80, 0, 255} };
 
   myShapes::Rectangle r1{ {150, 650}, {300, 750}, {122, 0, 0} };
   myShapes::Rectangle r2{ {400, 300}, {500, 600}, {255, 255, 255} };
+  //End of my inits
 
   while (!win.should_close()) {
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       win.close();
     }
 
-    c1.draw(&win);
-    c2.draw(&win, 9);
-    c3.draw(&win, 50, 5.0f);
-
-    r1.draw(&win);
-    r2.draw(&win, 0.2f);
+    //Code moved to bottom, to draw shapes after mouse cursor creation
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
@@ -68,6 +65,36 @@ int main(int argc, char* argv[])
     unsigned int font_size = 35;
     
     win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
+
+
+
+    //My stuff
+    std::array<myShapes::Circle, 3> hoveredCircleArr{c1, c2, c3};
+    std::array<myShapes::Rectangle, 2> hoveredRectArr{ r1, r2 };
+
+    for (myShapes::Circle c : hoveredCircleArr)
+    {
+        if (c.is_inside({ (float)mouse_position.first, (float)mouse_position.second }))
+            c.draw(&win, 50, 2.0f);
+        else
+            c.draw(&win, 50);
+    }
+    for (myShapes::Rectangle r : hoveredRectArr)
+    {
+        if (r.is_inside({ (float)mouse_position.first, (float)mouse_position.second }))
+            r.draw(&win, 2.0f);
+        else
+            r.draw(&win);
+    }
+
+    /*c1.draw(&win); old drawings, I like to keep them here for more thickness/accuracy tests
+    c2.draw(&win, 9);
+    c3.draw(&win, 50, 5.0f);
+
+    r1.draw(&win);
+    r2.draw(&win, 0.2f);*/
+    //End of my stuff
+
 
     win.update();
   }
