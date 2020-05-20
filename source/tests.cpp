@@ -154,6 +154,22 @@ TEST_CASE("Rectangle Perimeter")
 	REQUIRE(r.perimeter() == Approx(10.0f));
 }
 
+TEST_CASE("Inside Shapes")
+{
+	myShapes::Circle c{ {300, 300}, 100, {1, 1, 1} };
+
+	REQUIRE(c.is_inside({350, 320})); //magnitude of 53.85, contained in circle
+	REQUIRE(!c.is_inside({ 400, 400 })); //100 units in both directions, magnitude difference larger than 100, shouldn't be contained in circle
+
+	myShapes::Rectangle r{ {100, 200}, {200, 300}, {1, 1, 1} }; //basically a square from (100, 200) to (200, 300)
+
+	REQUIRE(r.is_inside({ 150, 250 }));
+	REQUIRE(!r.is_inside({ 150, 350 })); //check that all 4 fail conditions work properly (x > max_.x, x < max_.x, etc...)
+	REQUIRE(!r.is_inside({ 250, 250 }));
+	REQUIRE(!r.is_inside({ 50, 250 }));
+	REQUIRE(!r.is_inside({ 150, 150 }));
+}
+
 int main(int argc, char *argv[])
 {
 	return Catch::Session().run(argc, argv);
