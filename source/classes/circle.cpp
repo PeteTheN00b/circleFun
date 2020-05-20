@@ -45,3 +45,10 @@ void myShapes::Circle::draw(Window* win, int accuracy, float thickness) const //
 			thickness);
 	}
 }
+
+bool myShapes::Circle::is_inside(Vec2 const& point) const
+{
+	Vec2 dist = point - centre_;
+	return sqrt(dist.x * dist.x + dist.y * dist.y) <= radius_;
+	//If the magnitude of the distance between the point and the circle's centre is smaller than the circle's radius, then this point must be in the circle
+}

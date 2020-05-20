@@ -21,6 +21,8 @@ namespace myShapes{ //prevents naming conflict with stdcall library in tests.cpp
 		float perimeter() const;
 		void draw(Window* win) const;
 		void draw(Window* win, float thickness) const;
+
+		bool is_inside(Vec2 const& point) const;
 	};
 }
 

@@ -34,3 +34,8 @@ void myShapes::Rectangle::draw(Window* win, float thickness) const
 		color_.r / 255.f, color_.g / 255.f, color_.b / 255.f,
 		thickness);
 }
+
+bool myShapes::Rectangle::is_inside(Vec2 const& point) const
+{
+	return point.x <= max_.x && min_.x <= point.x && min_.y <= point.y && point.y <= max_.y;
+}
