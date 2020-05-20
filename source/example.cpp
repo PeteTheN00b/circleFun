@@ -99,8 +99,8 @@ int main(int argc, char* argv[])
     
     clock.draw(&win, 30);
     clock.draw_angle(&win, fmod(win.get_time(), 60) * 6, 0.5f); //second hand (* 6 from * 360 / 60, / 60 to provide range from 0 to 1, * 360 to increase to angle range 0 to 360)
-    clock.draw_angle(&win, fmod((win.get_time() / 60), 6) * 60, 1.0f); //minute hand
-    clock.draw_angle(&win, fmod((win.get_time() / 3600), 6) * 60, 2.0f); //hour hand
+    clock.draw_angle(&win, fmod((win.get_time() / 60), 60) * 6, 1.0f); //minute hand
+    clock.draw_angle(&win, fmod((win.get_time() / 3600), 60) * 6, 2.0f); //hour hand
     //End of my stuff
 
 
