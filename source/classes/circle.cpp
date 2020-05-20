@@ -17,12 +17,12 @@ float myShapes::Circle::circumference() const
 	return 2 * M_PI * radius_;
 }
 
-void myShapes::Circle::draw(Window* win, int accuracy) const
+void myShapes::Circle::draw(Window const& win, int accuracy) const
 {
 	draw(win, accuracy, 1);
 }
 
-void myShapes::Circle::draw(Window* win, int accuracy, float thickness) const //I'd like to leave this comment as a reminder to my stupid self that passing an argument through means you should use a god damn pointer
+void myShapes::Circle::draw(Window const& win, int accuracy, float thickness) const //I'd like to leave this comment as a reminder to my stupid self that passing an argument through means you should use a god damn pointer
 {
 	for (int i = 0; i < accuracy; i++)
 	{
@@ -39,7 +39,7 @@ void myShapes::Circle::draw(Window* win, int accuracy, float thickness) const //
 
 		lineCentre += centre_;
 
-		win->draw_line(lineCentre.x + lineOffset.x, lineCentre.y + lineOffset.y,
+		win.draw_line(lineCentre.x + lineOffset.x, lineCentre.y + lineOffset.y,
 			lineCentre.x - lineOffset.x, lineCentre.y - lineOffset.y,
 			color_.r / 255.f, color_.g / 255.f, color_.b / 255.f,
 			thickness);

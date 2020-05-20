@@ -78,16 +78,16 @@ int main(int argc, char* argv[])
     for (myShapes::Circle c : hoveredCircleArr)
     {
         if (c.is_inside({ (float)mouse_position.first, (float)mouse_position.second }))
-            c.draw(&win, 50, 2.0f);
+            c.draw(win, 50, 2.0f);
         else
-            c.draw(&win, 50);
+            c.draw(win, 50);
     }
     for (myShapes::Rectangle r : hoveredRectArr)
     {
         if (r.is_inside({ (float)mouse_position.first, (float)mouse_position.second }))
-            r.draw(&win, 2.0f);
+            r.draw(win, 2.0f);
         else
-            r.draw(&win);
+            r.draw(win);
     }
 
     /*c1.draw(&win); old drawings, I like to keep them here for more thickness/accuracy tests
@@ -97,7 +97,7 @@ int main(int argc, char* argv[])
     r1.draw(&win);
     r2.draw(&win, 0.2f);*/
     
-    clock.draw(&win, 30);
+    clock.draw(win, 30);
     clock.draw_angle(&win, fmod(win.get_time(), 60) * 6, 0.5f); //second hand (* 6 from * 360 / 60, / 60 to provide range from 0 to 1, * 360 to increase to angle range 0 to 360)
     clock.draw_angle(&win, fmod((win.get_time() / 60), 60) * 6, 1.0f); //minute hand
     clock.draw_angle(&win, fmod((win.get_time() / 3600), 60) * 6, 2.0f); //hour hand
