@@ -46,6 +46,11 @@ TEST_CASE("Vec2Tests")
 	REQUIRE(a.x == Approx(9.0f));
 	REQUIRE(a.y == Approx(21.0f));
 
+	a /= 0; //should print message and leave a unchanged
+
+	REQUIRE(a.x == Approx(9.0f));
+	REQUIRE(a.y == Approx(21.0f));
+
 
 
 	//a should be 9,21, b should be -1, -3

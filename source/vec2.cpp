@@ -2,6 +2,8 @@
 #include "vec2.hpp"
 #include "vec2.hpp" //done a second time for the sake of testing include guards, not to serve any functionality
 
+#include <iostream>
+
 Vec2& Vec2::operator+=(Vec2 const& v)
 {
 	x += v.x;
@@ -28,6 +30,12 @@ Vec2& Vec2::operator*=(float s)
 
 Vec2& Vec2::operator/=(float s)
 {
+	if (s == 0)
+	{
+		std::cout << "Division by 0 detected!" << std::endl;
+		return *this;
+	}
+
 	x /= s;
 	y /= s;
 
