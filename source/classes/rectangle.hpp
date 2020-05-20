@@ -19,7 +19,8 @@ namespace myShapes{ //prevents naming conflict with stdcall library in tests.cpp
 		Rectangle(Vec2 const& min, Vec2 const& max, Color const& color);
 
 		float perimeter() const;
-		void draw(Window* win);
+		void draw(Window* win) const;
+		void draw(Window* win, float thickness) const;
 	};
 }
 

@@ -23,6 +23,7 @@ namespace myShapes { //only necessary to prevent naming conflicts for the rectan
 
 		float circumference() const;
 		void draw(Window* win, int accuracy = 20) const; //accuracy is the number of segments used to represent the circle
+		void draw(Window* win, int accuracy, float thickness) const;
 	};
 }
 
