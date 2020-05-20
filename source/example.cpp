@@ -18,6 +18,9 @@ int main(int argc, char* argv[])
 
   myShapes::Rectangle r1{ {150, 650}, {300, 750}, {122, 0, 0} };
   myShapes::Rectangle r2{ {400, 300}, {500, 600}, {255, 255, 255} };
+
+
+  myShapes::Circle clock({ 75, 75 }, { 50 }, { 122, 122, 122 });
   //End of my inits
 
   while (!win.should_close()) {
@@ -93,6 +96,11 @@ int main(int argc, char* argv[])
 
     r1.draw(&win);
     r2.draw(&win, 0.2f);*/
+    
+    clock.draw(&win, 30);
+    clock.drawAngle(&win, fmod(win.get_time(), 60) * 6, 0.5f); //second hand (* 6 from * 360 / 60, / 60 to provide range from 0 to 1, * 360 to increase to angle range 0 to 360)
+    clock.drawAngle(&win, fmod((win.get_time() / 60), 6) * 60, 1.0f); //minute hand
+    clock.drawAngle(&win, fmod((win.get_time() / 3600), 6) * 60, 2.0f); //hour hand
     //End of my stuff
 
 
