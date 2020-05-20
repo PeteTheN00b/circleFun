@@ -24,11 +24,11 @@ int main(int argc, char* argv[])
     }
 
     c1.draw(&win);
-    c2.draw(&win);
-    c3.draw(&win, 50);
+    c2.draw(&win, 9);
+    c3.draw(&win, 50, 5.0f);
 
     r1.draw(&win);
-    r2.draw(&win);
+    r2.draw(&win, 0.2f);
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
