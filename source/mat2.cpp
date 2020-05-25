@@ -3,6 +3,7 @@
 
 #define _USE_MATH_DEFINES //have to do this to get access to pi constant
 #include <math.h>
+#include <iostream>
 
 Mat2& Mat2::operator*=(Mat2 const& m)
 {
@@ -50,6 +51,12 @@ Vec2 operator*(Vec2 const& v, Mat2 const& m)
 
 Mat2 inverse(Mat2 const& m)
 {
+	if (m.det() == 0)
+	{
+		std::cout << "Impossible Inverse Detected, Returning Identity Matrix" << std::endl;
+		return Mat2{ 1, 0, 0, 1 };
+	}
+
 	Mat2 inv{m.e_11, -m.e_10, -m.e_01, m.e_00};
 	inv.e_00 /= m.det();
 	inv.e_10 /= m.det();

@@ -124,6 +124,10 @@ TEST_CASE("Mat2FurtherTests2.6")
 
 	REQUIRE((m1 * inverse(m1)) == i); //any matrix, multiplied by its inverse, should return the identity matrix
 
+	Mat2 mNoInv{ 3, 6, 1, 2 }; //this matrix should have a determinant of 0
+	REQUIRE(mNoInv.det() == 0);
+	REQUIRE(inverse(mNoInv) == i); //exception case returns an identity matrix
+
 	Mat2 t_m1{ 2, 7, 5, 3 };
 	REQUIRE(transpose(m1) == t_m1);
 }
