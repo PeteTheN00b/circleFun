@@ -1,5 +1,7 @@
 #include "circle.hpp"
 
+#include "../mat2.hpp"
+
 #define _USE_MATH_DEFINES //have to do this to get access to pi constant
 #include <math.h>
 
@@ -27,9 +29,8 @@ void myShapes::Circle::draw(Window const& win, int accuracy, float thickness) co
 	for (int i = 0; i < accuracy; i++)
 	{
 		//r cos(theta) gives you the x offset of a point on the circle, by using (i / accuracy * 2pi) we can target several points along the circumference of the circle
-		Vec2 lineCentre;
-		lineCentre.x += radius_ * cos(2 * M_PI * (float)i / (float)accuracy); //i forgot that this was integer division the first time, this caused me a lot of headaches
-		lineCentre.y += radius_ * sin(2 * M_PI * (float)i / (float)accuracy);
+		Vec2 lineCentre{ radius_, 0};
+		lineCentre = lineCentre * make_rotation_mat2((float)i / (float)accuracy * 360);
 
 		Vec2 lineOffset{ -lineCentre.y, lineCentre.x}; //A perpendicular vector to where our radius is.
 		lineOffset *= M_PI; //blah blah math, blah blah circumference divided by radius, blah blah 2 PI, blah blah extends in 2 directions so only PI
