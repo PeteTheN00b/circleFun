@@ -1,7 +1,7 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 
-#include "..\vec2.hpp"
+#include "../vec2.hpp"
 #include "../color.hpp" //is there any difference between using / and \ ?
 
 #include "../window.hpp"
