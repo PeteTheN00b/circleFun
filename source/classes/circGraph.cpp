@@ -106,6 +106,13 @@ void circGraph::damage(float angle, float dmg, float angleSpace)
 	float baseStrMin = pointStrength(fmod(angle - angleSpace, 360.f));
 	float baseStrMax = pointStrength(fmod(angle + angleSpace, 360.f));
 
+	for (circPoint& point : points_)
+	{
+		if (fmod(angle - angleSpace - 1.f, 360.f) < point.angle_ && point.angle_ < fmod(angle + angleSpace + 1.f, 360.f)) point.strength_ -= dmg;
+
+		//points_.erase to delete excess points
+	}
+
 	generateFixedPoint(fmod(angle - angleSpace - 1.f, 360.f), baseStrMin);
 	generateFixedPoint(fmod(angle - angleSpace, 360.f), baseStrMin - dmg);
 	generateFixedPoint(fmod(angle + angleSpace, 360.f), baseStrMax - dmg);
@@ -117,7 +124,7 @@ void circGraph::draw(Window const& win)
 	int const accuracy = 50;
 	Vec2 const centre{ 400, 400 };
 
-	for (int i = 0; i <= accuracy; i++)
+	for (int i = 0; i <= accuracy; ++i) //why is 360 always so weird? its like there's a massive value at point strength 0
 	{
 		Vec2 lineCentre{ 0,  -pointStrength((float)i / (float)accuracy * 360.f)};
 		lineCentre = lineCentre * transpose(make_rotation_mat2((float)i / (float)accuracy * 360.f));
