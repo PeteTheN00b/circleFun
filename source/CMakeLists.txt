@@ -7,6 +7,8 @@ vec2.cpp
 mat2.cpp
 classes/circle.cpp
 classes/rectangle.cpp
+classes/circGraph.cpp
+classes/circPoint.cpp
   )
 target_link_libraries(example
   glfw

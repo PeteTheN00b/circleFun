@@ -1,10 +1,12 @@
 #include "window.hpp"
 #include <GLFW/glfw3.h>
 #include <utility>
-#include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #include "classes/circle.hpp"
 #include "classes/rectangle.hpp"
+#include "classes/circGraph.hpp"
 
 
 int main(int argc, char* argv[])
@@ -18,6 +20,16 @@ int main(int argc, char* argv[])
 
   myShapes::Rectangle r1{ {150, 650}, {300, 750}, {122, 0, 0} };
   myShapes::Rectangle r2{ {400, 300}, {500, 600}, {255, 255, 255} };
+
+  circGraph cG1;
+  /*cG1.generatePoint(90, 25);
+  cG1.generatePoint(0, 15);
+  cG1.generatePoint(180, -90);
+  cG1.generatePoint(270, -15);*/
+  cG1.generateFixedPoint(0, 20);
+  cG1.generateFixedPoint(30, 0);
+  cG1.generateFixedPoint(60, 0);
+  cG1.generateFixedPoint(90, 20);
 
 
   myShapes::Circle clock({ 75, 75 }, { 50 }, { 122, 122, 122 });
@@ -53,6 +65,16 @@ int main(int argc, char* argv[])
                     mouse_position.first, mouse_position.second, // TO mouse position in pixel coords
                     1.0,0.0,0.0, // color with r,g,b in [0.0, 1.0]
                     1.0);        // line thickness = 1.0 * default thickness
+
+      //my stuff
+      float impactAngle = atan((mouse_position.second - 400.) / (mouse_position.first - 400)) * 180 / M_PI;
+
+      //quadrant stuff
+      impactAngle += 90;
+      if (mouse_position.first < 400) impactAngle += 180;
+
+      cG1.damage(impactAngle, 3);
+      //end of my stuff
     }
 
     win.draw_line(0, mouse_position.second, 10, mouse_position.second, 0.0, 0.0, 0.0);
@@ -75,7 +97,7 @@ int main(int argc, char* argv[])
     std::array<myShapes::Circle, 3> hoveredCircleArr{c1, c2, c3};
     std::array<myShapes::Rectangle, 2> hoveredRectArr{ r1, r2 };
 
-    for (myShapes::Circle c : hoveredCircleArr)
+    /*for (myShapes::Circle c : hoveredCircleArr)
     {
         if (c.is_inside({ (float)mouse_position.first, (float)mouse_position.second }))
             c.draw(win, 50, 2.0f);
@@ -88,14 +110,9 @@ int main(int argc, char* argv[])
             r.draw(win, 2.0f);
         else
             r.draw(win);
-    }
+    }*/
 
-    /*c1.draw(&win); old drawings, I like to keep them here for more thickness/accuracy tests
-    c2.draw(&win, 9);
-    c3.draw(&win, 50, 5.0f);
-
-    r1.draw(&win);
-    r2.draw(&win, 0.2f);*/
+    cG1.draw(win);
     
     clock.draw(win, 30);
     clock.draw_angle(&win, fmod(win.get_time(), 60) * 6, 0.5f); //second hand (* 6 from * 360 / 60, / 60 to provide range from 0 to 1, * 360 to increase to angle range 0 to 360)
