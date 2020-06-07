@@ -12,6 +12,8 @@
 class circGraph
 {
 	float baseStrength_ = 30;
+	Vec2 centre_{400, 400};
+	float ringSize_ = 40; //distance from centre that the ring should be drawn
 
 	std::vector<circPoint> points_;
 
@@ -21,7 +23,8 @@ public:
 	void generateFixedPoint(float angle, float strength); //generates a point with a fixed strength at the target location, regardless of previous point strength
 	void damage(float angle, float dmg, float angleSpace = 10);
 
-	void draw(Window const& win);
+	bool is_inside(Vec2 const& point);
+	void draw(Window const& win, float thickness = 1);
 };
 
 #endif

@@ -119,10 +119,23 @@ void circGraph::damage(float angle, float dmg, float angleSpace)
 	generateFixedPoint(fmod(angle + angleSpace + 1.f, 360.f), baseStrMax);
 }
 
-void circGraph::draw(Window const& win)
+bool circGraph::is_inside(Vec2 const& point)
+{
+	float pointAngle = atan((point.y - centre_.y) / (point.x - centre_.x)) * 180.f / (float)M_PI;
+
+	//quadrant stuff
+	pointAngle += 90;
+	if (point.x < 400) pointAngle += 180;
+
+	Vec2 dist = point - centre_;
+	float distVal = sqrt(dist.x * dist.x + dist.y * dist.y);
+	return distVal <= pointStrength(pointAngle) + ringSize_ && distVal > ringSize_;
+}
+
+void circGraph::draw(Window const& win, float thickness)
 {
 	int const accuracy = 50;
-	Vec2 const centre{ 400, 400 };
+	//Vec2 const centre{ 400, 400 };
 
 	for (int i = 0; i <= accuracy; ++i) //why is 360 always so weird? its like there's a massive value at point strength 0
 	{
@@ -133,10 +146,9 @@ void circGraph::draw(Window const& win)
 		lineOffset *= M_PI;
 		lineOffset /= accuracy;
 
-		const float minStrength = 40;
-		Vec2 minCentre{ 0, -minStrength };
+		Vec2 minCentre{ 0, -ringSize_ };
 		minCentre = minCentre * transpose(make_rotation_mat2((float)i / (float)accuracy * 360.f));
-		minCentre += centre;
+		minCentre += centre_;
 
 		lineCentre += minCentre;
 
@@ -149,14 +161,14 @@ void circGraph::draw(Window const& win)
 		win.draw_line(lineCentre.x, lineCentre.y,
 			minCentre.x, minCentre.y,
 			255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
-			1);
+			thickness);
 		win.draw_line(lineCentre.x + lineOffset.x, lineCentre.y + lineOffset.y,
 			minCentre.x, minCentre.y,
 			255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
-			1);
+			thickness);
 		win.draw_line(lineCentre.x - lineOffset.x, lineCentre.y - lineOffset.y,
 			minCentre.x, minCentre.y,
 			255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
-			1);
+			thickness);
 	}
 }

@@ -112,7 +112,10 @@ int main(int argc, char* argv[])
             r.draw(win);
     }*/
 
-    cG1.draw(win);
+    if(cG1.is_inside({ (float)mouse_position.first, (float)mouse_position.second }))
+        cG1.draw(win);
+    else
+        cG1.draw(win, 0.5);
     
     clock.draw(win, 30);
     clock.draw_angle(&win, fmod(win.get_time(), 60) * 6, 0.5f); //second hand (* 6 from * 360 / 60, / 60 to provide range from 0 to 1, * 360 to increase to angle range 0 to 360)
