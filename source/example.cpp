@@ -22,14 +22,10 @@ int main(int argc, char* argv[])
   myShapes::Rectangle r2{ {400, 300}, {500, 600}, {255, 255, 255} };
 
   circGraph cG1;
-  /*cG1.generatePoint(90, 25);
-  cG1.generatePoint(0, 15);
-  cG1.generatePoint(180, -90);
-  cG1.generatePoint(270, -15);*/
-  cG1.generateFixedPoint(0, 20);
+  cG1.generateFixedPoint(0, 80);
   cG1.generateFixedPoint(30, 0);
   cG1.generateFixedPoint(60, 0);
-  cG1.generateFixedPoint(90, 20);
+  cG1.generateFixedPoint(90, 80);
 
 
   myShapes::Circle clock({ 75, 75 }, { 50 }, { 122, 122, 122 });
@@ -61,10 +57,10 @@ int main(int argc, char* argv[])
 
     auto mouse_position = win.mouse_position();
     if (left_pressed) {
-      win.draw_line(30.0f, 30.0f, // FROM pixel idx with coords (x=30, y=30)
-                    mouse_position.first, mouse_position.second, // TO mouse position in pixel coords
-                    1.0,0.0,0.0, // color with r,g,b in [0.0, 1.0]
-                    1.0);        // line thickness = 1.0 * default thickness
+      //win.draw_line(30.0f, 30.0f, // FROM pixel idx with coords (x=30, y=30)
+      //              mouse_position.first, mouse_position.second, // TO mouse position in pixel coords
+      //              1.0,0.0,0.0, // color with r,g,b in [0.0, 1.0]
+      //              1.0);        // line thickness = 1.0 * default thickness
 
       //my stuff
       float impactAngle = atan((mouse_position.second - 400.) / (mouse_position.first - 400)) * 180 / M_PI;
@@ -73,9 +69,21 @@ int main(int argc, char* argv[])
       impactAngle += 90;
       if (mouse_position.first < 400) impactAngle += 180;
 
-      cG1.damage(impactAngle, 3);
+      cG1.damage(impactAngle, 1);
       //end of my stuff
     }
+    else
+    {
+        float impactAngle = atan((mouse_position.second - 400.) / (mouse_position.first - 400)) * 180 / M_PI;
+
+        //quadrant stuff
+        impactAngle += 90;
+        if (mouse_position.first < 400) impactAngle += 180;
+
+        cG1.damage(impactAngle, -1);
+    }
+
+    
 
     win.draw_line(0, mouse_position.second, 10, mouse_position.second, 0.0, 0.0, 0.0);
     win.draw_line(win.window_size().second - 10, mouse_position.second, win.window_size().second, mouse_position.second, 0.0, 0.0, 0.0);
@@ -115,7 +123,7 @@ int main(int argc, char* argv[])
     if(cG1.is_inside({ (float)mouse_position.first, (float)mouse_position.second }))
         cG1.draw(win);
     else
-        cG1.draw(win, 0.5);
+        cG1.draw(win, 0.2);
     
     clock.draw(win, 30);
     clock.draw_angle(&win, fmod(win.get_time(), 60) * 6, 0.5f); //second hand (* 6 from * 360 / 60, / 60 to provide range from 0 to 1, * 360 to increase to angle range 0 to 360)

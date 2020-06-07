@@ -134,7 +134,7 @@ bool circGraph::is_inside(Vec2 const& point)
 
 void circGraph::draw(Window const& win, float thickness)
 {
-	int const accuracy = 50;
+	int const accuracy = 100;
 	//Vec2 const centre{ 400, 400 };
 
 	for (int i = 0; i <= accuracy; ++i) //why is 360 always so weird? its like there's a massive value at point strength 0
@@ -162,13 +162,18 @@ void circGraph::draw(Window const& win, float thickness)
 			minCentre.x, minCentre.y,
 			255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
 			thickness);
-		win.draw_line(lineCentre.x + lineOffset.x, lineCentre.y + lineOffset.y,
-			minCentre.x, minCentre.y,
-			255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
-			thickness);
-		win.draw_line(lineCentre.x - lineOffset.x, lineCentre.y - lineOffset.y,
-			minCentre.x, minCentre.y,
-			255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
-			thickness);
+
+		int jMax = (int)(pointStrength((float)i / (float)accuracy * 360.f) / 8);
+		for (int j = 1; j <= jMax; j++) //for every 8 units of the radius, draw 2 more lines
+		{
+			win.draw_line(lineCentre.x + (float)j / (float)jMax * lineOffset.x, lineCentre.y + (float)j / (float)jMax * lineOffset.y,
+				minCentre.x, minCentre.y,
+				255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
+				thickness);
+			win.draw_line(lineCentre.x - (float)j / (float)jMax * lineOffset.x, lineCentre.y - (float)j / (float)jMax * lineOffset.y,
+				minCentre.x, minCentre.y,
+				255.f / 255.f, 0.f / 255.f, 0.f / 255.f,
+				thickness);
+		}
 	}
 }
